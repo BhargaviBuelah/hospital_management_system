@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+<div class="col-md-12 mt-5">
+  <div class="mb-3">
+  <h3 ><span class="text-danger">Hospital Admin Panel</span>
+    &nbsp;&nbsp;&nbsp;
+    
+  </h3>
+</div>
+  <hr>
+</div>
+
+<div class="col-md-4 mt-5">
+    <h4>Enter Patient Details</h4> 
+    <hr>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="pid" class="form-label">Patient ID</label>
+        <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter Patient ID" required>
+   </div>
+     
+    
+    <div class="mb-3">
+        <label for="pname" class="form-label">Patient Name</label>
+        <input type="text" class="form-control" id="pname" name="pname" placeholder="Enter Patient Name" required>
+    </div>
+    <div class="mb-3">
+      <label for="number" class="form-label">Phone number</label>
+      <input type="text" class="form-control" id="number" name="number" placeholder="Enter Patient Name" required>
+  </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email Address</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter Patient Email" required>
+  </div>
+    <div class="mb-3">
+        <label for="pdesc" class="form-label">Description</label>
+        <textarea class="form-control" id="pdesc" name="pdesc" rows="1" placeholder="Enter disease Description" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="dname" class="form-label">Docter Name</label>
+        <input type="text" class="form-control" id="dname" name="dname" placeholder="Enter Reference Docter Name" required>
+    </div>       
+    
+    <div class="mb-3">
+      <small>Select Test Here</small>
+      <select name="test" id="test"  multiple>      
+        <option value="C">Anti CCP Test -₹ 1,600</option>
+        <option value="H">Anti HCV Test -	₹ 638</option>
+        <option value="P">ANCA-P Test - ₹ 810</option>
+        <option value="E">Absolute Eosinophil Count -₹ 81</option>
+        <option value="B">Blood Group-₹ 110</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+<div class="col-md-8 mt-5">
+  <h4>Patient Dashboard</h4> 
+    <hr>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Patient ID or Test ID</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Description</th>
+        <th scope="col">Docter Name</th>
+        
+        
+        
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Bill</th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for x in data %}
+        <tr>  
+          <td>{{x.pid}}</td>        
+          <td>{{x.pname}}</td>
+          <td>{{x.number}}</td>
+          <td>{{x.email}}</td>
+          <td>{{x.pdesc}}</td>
+          <td>{{x.dname}}</td>
+           
+                
+          
+          
+          <td><a href="/edit/{{x.id}}"><button class="btn btn-warning">Edit</button></a></td>
+          <td><a href="/delete/{{x.id}}"><button class="btn btn-danger">Delete</button></a></td>
+          <td><a href="/bill/{{x.id}}"><button class="btn btn-success">Bill</button></a></td>
+          
+         </tr>
+         {% endfor %}
+    </tbody>
+
+  </table>
+</div>  
+
+
+{% endblock 'main' %}

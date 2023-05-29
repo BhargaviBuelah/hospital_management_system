@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+<div class="col-md-12 mt-5">
+  <div class="mb-3">
+  <h3 ><span class="text-danger">Hospital Admin Panel</span>
+    &nbsp;&nbsp;&nbsp;
+   
+  </h3>
+</div>
+  <hr>
+</div>
+
+<div class="col-md-4 mt-5">
+    <h4>Update Patient Details</h4> 
+    <hr>
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    
+    <div class="mb-3">
+        <label for="pname" class="form-label">Patient Name</label>
+        <input type="text" class="form-control" id="pname" value="{{data.pname}}" name="pname" placeholder="Enter Patient Name" required>
+    </div>
+    <div class="mb-3">
+      <label for="number" class="form-label">Phone number</label>
+      <input type="text" class="form-control" id="number" value="{{data.number}}" name="number" placeholder="Enter Patient Name" required>
+  </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email Address</label>
+      <input type="email" class="form-control" id="email" value="{{data.email}}" name="email" placeholder="Enter Patient Email" required>
+  </div>
+    <div class="mb-3">
+        <label for="pdesc" class="form-label">Description</label>
+        <textarea class="form-control" id="pdesc" name="pdesc" rows="1"  placeholder="Enter disease Description" required>{{data.pdesc}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="dname" class="form-label">Docter Name</label>
+        <input type="text" class="form-control" id="dname" name="dname" value="{{data.dname}}" placeholder="Enter Reference Docter Name" required>
+    </div>       
+    
+    <div class="mb-3">
+      <small>Select Test Here</small>
+      <select name="test" id="test" value=""  multiple> 
+        {% if data.test == 'C' %}
+        <option value="C" selected>Anti CCP Test -₹ 1,600</option>
+        {% elif data.test == 'H' %}
+        <option value="H" selected>Anti HCV Test -	₹ 638</option>
+        {% elif data.test == 'P' %}
+        <option value="P" selected>ANCA-P Test - ₹ 810</option>
+        {% elif data.test == 'E' %}
+        <option value="E" selected>Absolute Eosinophil Count -₹ 81</option>
+        {% elif data.test == 'B' %}
+        <option value="B" selected>Blood Group-₹ 110</option>
+        {% endif %}         
+        <option value="C">Anti CCP Test -₹ 1,600</option>
+        <option value="H">Anti HCV Test -	₹ 638</option>
+        <option value="P">ANCA-P Test - ₹ 810</option>
+        <option value="E">Absolute Eosinophil Count -₹ 81</option>
+        <option value="B">Blood Group-₹ 110</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+    
+  </form>
+</div>  
+
+
+{% endblock 'main' %}

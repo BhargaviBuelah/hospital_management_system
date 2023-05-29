@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+<div class="col-md-12 mt-5">
+  <div class="mb-3">
+  <h3 ><span class="text-danger">Hospital Admin Panel</span>
+    &nbsp;&nbsp;&nbsp;
+   
+  </h3>
+  </div>
+  <hr>
+</div>
+<div class="col-md-12 mt-5">
+    <h4>Patient Bill</h4> 
+    <hr>
+</div>
+<div class="col-md-4 mt-5">
+    
+  <form method="POST" action="">
+    {% csrf_token %}         
+    <table class="table table-hover">
+      <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Docter Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Test ID</th>
+            <th scope="col">Test Name</th>            
+            <th scope="col">Rs/-(Cost for each test)</th>
+            <th scope="col">Barcode</th> 
+                    
+          </tr>
+        </thead>
+    
+        <tbody>            
+          {% for x in data %}            
+            <tr>
+              <td>{{ x.pname}}</td>
+              <td>{{ x.number}}</td>
+              <td>{{ x.dname}}</td>
+              <td>{{ x.email}}</td>
+              <td>{{ x.tid}}</td>
+              <td>{{ x.test_name}}</td> 
+              <td>{{ x.price }}</td>
+              <td><img src="{{x.barcode.url}}" height="50" width="125"></td>
+                      
+            </tr>                     
+          {% endfor %}            
+        </tbody>    
+    </table>
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit">Procced</button>
+    </div>  
+  </form>
+</div>
+
+
+{% endblock 'main' %} 
